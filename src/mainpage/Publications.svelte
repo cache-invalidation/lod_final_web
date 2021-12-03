@@ -20,8 +20,6 @@
         {value: 2, text: "Посты"},
         {value: 3, text: "Коментарии"},
     ];
-
-    // let selectedEsts = [];
 </script>
 
 <div class="publications-page">
@@ -32,8 +30,8 @@
     <div class="filter">
         <div class="filter-item"><DatePicker on:change={i => startData = i.detail } label="Начало"/></div>
         <div class="filter-item"><DatePicker on:change={i => endData = i.detail } label="Конец" /></div>
-        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)} optionsClasses="bg"/></div>
-        <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg"/></div>
+        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
+        <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
     <div class="card-holder">
