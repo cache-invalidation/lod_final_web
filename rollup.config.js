@@ -53,13 +53,18 @@ export default {
             whitelistPatterns: [], // Same as above, but list of regexes
             tailwind: { 
               colors: { 
-                primary: "#b027b0",
-                secondary: "#009688",
-                error: "#f44336",
-                success: "#4caf50",
-                alert: "#ff9800",
+                primary: "#826dfd",
+                secondary: "#ffdc80",
+                error: "#e65872",
+                success: "#7cbaa2",
+                alert: "#ffdc80",
+                pink: "#c1beff",
+                black: "#000000",
+                white: "#ffffff",
+                green: "#e65872",
+                red: "#7cbaa2",
                 blue: "#2196f3",
-                dark: "#212121" 
+				dark: "#212121" 
               }, // Object of colors to generate a palette from, and then all the utility classes
               darkMode: true, 
             }, 
