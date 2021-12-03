@@ -1,6 +1,7 @@
 <script>
     import Button from "smelte/src/components/Button";
 
+    let loginWindow = null;
 </script>
 
 <div class="top-bar">
@@ -9,7 +10,8 @@
         <h1 class="title"><span class="text-primary">Твой</span> Цифровой Двойник</h1>
     </div>
     
-    <Button add="login-button" outlined>Выход</Button>
+    <Button add="login-button" on:click={() => {loginWindow = window.open("http://ya.ru", "login", "menubar=no,toolbar=no,location=no,status=no,width=200,height=200");}} outlined>Выход</Button>
+    <!-- <Button add="login-button" on:click={() => {loginWindow.close()}} outlined>Выход</Button> -->
 </div>
 
 <style>
