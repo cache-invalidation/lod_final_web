@@ -5,6 +5,7 @@
     import Publications from "./Publications.svelte"
     import Mentions from "./Mentions.svelte"
     import Search from "./Search.svelte"
+    import Friends from "./Friends.svelte"
 
     // import * as animateScroll from "svelte-scrollto";
 
@@ -21,6 +22,8 @@
 <Publications/>
 {:else if active === 2}
 <Mentions/>
+{:else if active === 3}
+<Friends/>
 {:else if active === 4}
 <Search/>
 {/if}
