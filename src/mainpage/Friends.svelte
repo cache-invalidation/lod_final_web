@@ -24,7 +24,7 @@
 
 <div class="publications-page">
     <div class="title">
-        <p><span class="primary-text">Твои</span> публикации</p>
+        <p><span class="primary-text">Твои</span> друзья</p>
         <hr width="100%" align="center">
     </div>
     <div class="filter">

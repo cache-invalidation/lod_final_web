@@ -139,6 +139,7 @@
 
 <style>
     .vis {
+        margin-top: 2%;
         display: flex;
         justify-content: center;
     }

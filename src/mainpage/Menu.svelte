@@ -1,32 +1,39 @@
 <script>
     import Button from "smelte/src/components/Button";
+    import * as animateScroll from "svelte-scrollto";
 
-    let active = 1;
+    export let active = 1;
+
+    function scrollTo() {
+        animateScroll.scrollTo({element: '.publications-page', duration: 2000});
+    }
 </script>
 
 <div class="menu-block">
     {#if active === 1}
-    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 1}}>Публикации</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2}}>Упоминания</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3}}>Друзья</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4}}>Поиск</Button>
+    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 1; scrollTo()}}>Публикации</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2; scrollTo()}}>Упоминания</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3; scrollTo()}}>Друзья</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4; scrollTo()}}>Поиск</Button>
     {:else if active === 2}
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1}}>Публикации</Button>
-    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 2}}>Упоминания</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3}}>Друзья</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4}}>Поиск</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1; scrollTo()}}>Публикации</Button>
+    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 2; scrollTo()}}>Упоминания</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3; scrollTo()}}>Друзья</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4; scrollTo()}}>Поиск</Button>
     {:else if active === 3}
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1}}>Публикации</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2}}>Упоминания</Button>
-    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 3}}>Друзья</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4}}>Поиск</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1; scrollTo()}}>Публикации</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2; scrollTo()}}>Упоминания</Button>
+    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 3; scrollTo()}}>Друзья</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 4; scrollTo()}}>Поиск</Button>
     {:else if active === 4}
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1}}>Публикации</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2}}>Упоминания</Button>
-    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3}}>Друзья</Button>
-    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 4}}>Поиск</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 1; scrollTo()}}>Публикации</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 2; scrollTo()}}>Упоминания</Button>
+    <Button add="menu-button" basicClasses="white-text" outlined on:click={() => {active = 3; scrollTo()}}>Друзья</Button>
+    <Button add="menu-button" basicClasses="white-text" on:click={() => {active = 4; scrollTo()}}>Поиск</Button>
     {/if}
 </div>
+
+<!-- <a on:click={() => animateScroll.scrollTo({element: 'scroll-to-element-selector'})}> Scroll to element </a> -->
 
 <style>
     .menu-block {
