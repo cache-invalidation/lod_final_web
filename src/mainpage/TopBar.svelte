@@ -18,7 +18,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-
+        margin-top: 1em;
     }
 
     .logo-and-title {

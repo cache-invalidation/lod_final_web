@@ -5,7 +5,6 @@ export function startLogin() {
     let loginEventListner = window.addEventListener('message', event => {
         if (event.origin.startsWith('http://192.168.31.134')) {
             token.set(event.data);
-            console.log(event.data);
             loginWindow.close();
 
             window.removeEventListener('message', loginEventListner);

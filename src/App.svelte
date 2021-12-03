@@ -11,26 +11,26 @@
     })
 </script>
 
-<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons&display=swap"
-    rel="stylesheet" /> -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons&display=swap"
+    rel="stylesheet" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700;900&display=swap" type="text/css" rel="stylesheet">
 
 <main>
-    {#if !tokenVal}
-    <Landing/>
-    {:else}
+    <!-- {#if !tokenVal} -->
+    <!-- <Landing/> -->
+    <!-- {:else} -->
     <MainPage/>
-    {/if}
+    <!-- {/if} -->
 </main>
 
 <style>
     main {
         font-family: 'Nunito', sans-serif;
         text-align: center;
-        padding: 1em;
+        /* padding: 1em; */
         max-width: 240px;
         margin: 0 auto;
         display: flex;
