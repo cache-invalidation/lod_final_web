@@ -20,23 +20,29 @@
         {value: 2, text: "Посты"},
         {value: 3, text: "Коментарии"},
     ];
-
-    // let selectedEsts = [];
 </script>
 
 <div class="publications-page">
     <div class="title">
-        <p><span class="primary-text">Твои</span> публикации</p>
+        <p><span class="primary-text">Твои</span> упоминания</p>
         <hr width="100%" align="center">
     </div>
     <div class="filter">
         <div class="filter-item"><DatePicker on:change={i => startData = i.detail } label="Начало"/></div>
         <div class="filter-item"><DatePicker on:change={i => endData = i.detail } label="Конец" /></div>
-        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)} optionsClasses="bg"/></div>
-        <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg"/></div>
+        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
+        <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
     <div class="card-holder">
+        <Card type="photo"/>
+        <Card type="text"/>
+        <Card type="photo"/>
+        <Card type="text"/>
+    </div>
+    <div class="card-holder">
+        <Card type="photo"/>
+        <Card type="text"/>
         <Card type="photo"/>
         <Card type="text"/>
     </div>
@@ -91,8 +97,11 @@
 
     .card-holder {
         display: flex;
-        justify-content: center;
-        margin-top: 5%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 3%;
+        width: 85%;
+
     }
 
     .footer {
