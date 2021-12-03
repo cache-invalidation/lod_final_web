@@ -2,6 +2,7 @@
     import { DatePicker } from "smelte";
     import { Select, Checkbox } from "smelte";
     import PubVis from "./PubVis.svelte"
+    import Card from "./Card.svelte"
 
     let startData = null;
     let endData = null;
@@ -35,12 +36,17 @@
         <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg"/></div>
     </div>
     <PubVis/>
+    <div class="card-holder">
+        <Card type="photo"/>
+        <Card type="text"/>
+    </div>
+    <div class="footer"></div>
 </div>
 
 <style>
     .publications-page {
         width: 100%;
-        height: 100vh;
+        /* height: 100vh; */
         background: linear-gradient(181.1deg, #BBB8FF -7.61%, rgba(239, 238, 255, 0) 95.19%);
         display: flex;
         flex-direction: column;
@@ -81,5 +87,15 @@
 
     .filter :global(.bg) {
         background-color: #ffffff;
+    }
+
+    .card-holder {
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+    }
+
+    .footer {
+        margin-top: 200px;
     }
 </style>
