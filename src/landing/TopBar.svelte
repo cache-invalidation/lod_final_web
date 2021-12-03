@@ -1,7 +1,8 @@
 <script>
     import ThreeButtons from "./ThreeButtons.svelte";
     import Button from "smelte/src/components/Button";
-
+    import { startLogin } from "./login";
+    
 </script>
 
 <div class="top-bar">
@@ -10,7 +11,7 @@
         <ThreeButtons b1_name="Главная" b2_name="Поддержка" b3_name="О нас"/>
     </div>
     
-    <Button add="login-button" outlined>Вход</Button>
+    <Button add="login-button" outlined on:click={startLogin}>Вход</Button>
 </div>
 
 <style>

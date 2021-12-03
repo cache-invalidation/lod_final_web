@@ -1,5 +1,6 @@
 <script>
     import Button from "smelte/src/components/Button";
+    import { startLogin } from "./login"
 </script>
 
 <div class="main-view">
@@ -17,7 +18,7 @@
             Живите полной жизнью в сети, а мы поможем управлять вашей репутацией и отслеживать ваши данные.
         </p>
 
-        <Button add="start-button">Начать</Button>
+        <Button add="start-button" on:click={startLogin}>Начать</Button>
     </div>
     <img src="img/landing-pic.svg" alt="landing-pic" class="landing-pic">
 </div>
