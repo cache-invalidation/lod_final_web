@@ -5,7 +5,7 @@
 
 <div class="top-bar">
     <div class="logo-and-title">
-        <img src="img/logo.svg" alt="logo" class="logo">
+        <img src="../static/img/logo.svg" alt="logo" class="logo">
         <h1 class="title"><span class="text-primary">Твой</span> Цифровой Двойник</h1>
     </div>
     

@@ -6,7 +6,7 @@
 </script>
 
 <div class="top-bar">
-    <img src="img/logo.svg" alt="logo" class="logo">
+    <img src="../static/img/logo.svg" alt="logo" class="logo">
     <div class="menu-buttons">
         <ThreeButtons b1_name="Главная" b2_name="Поддержка" b3_name="О нас"/>
     </div>

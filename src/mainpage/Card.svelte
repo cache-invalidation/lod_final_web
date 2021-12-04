@@ -35,7 +35,7 @@
         <!-- <div class="text-gray-700">Подвердите</div> -->
         <div slot="actions">
             <Button text on:click={() => showDialog = false}>Отменить</Button>
-            <Button text on:click={() => {showDialog = false; dialogArgee = true}}>Подвердить</Button>
+            <Button text on:click={() => {showDialog = false; dialogArgee = true}}>Подтвердить</Button>
         </div>
     </Dialog>
 
