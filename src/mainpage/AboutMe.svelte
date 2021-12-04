@@ -1,7 +1,7 @@
 <script>
     import { faPhoneAlt, faEnvelope, faVenusMars, faCity, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
     import Info from './Info.svelte'
-    import { token } from "../stores"
+    import { token, pfp } from "../stores"
     import { onMount } from 'svelte'
 
     let fetchData = {"jsonrpc": "2.0", "method": "get_user_info", "params": [$token], "id": 1};
@@ -18,6 +18,7 @@
         .then(data => {
             console.log(data.result);
             userData = data.result;
+            $pfp = userData[5];
         })
         .catch(err => {
             console.log(err);
