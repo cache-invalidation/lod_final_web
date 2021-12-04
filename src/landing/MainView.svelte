@@ -20,7 +20,7 @@
 
         <Button add="start-button" on:click={startLogin}>Начать</Button>
     </div>
-    <img src="img/landing-pic.svg" alt="landing-pic" class="landing-pic">
+    <img src="../static/img/landing-pic.svg" alt="landing-pic" class="landing-pic">
 </div>
 
 <style>
