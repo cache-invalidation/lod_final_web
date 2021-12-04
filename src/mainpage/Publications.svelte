@@ -4,10 +4,40 @@
     import PubVis from "./PubVis.svelte"
     import Card from "./Card.svelte"
 
+    import { token } from "../stores"
+    import { onMount } from 'svelte'
+
     let startData = null;
     let endData = null;
     let estSelected = null;
     let typeSelected = null;
+
+    let fetchData = {"jsonrpc": "2.0", "method": "get_publications", "params": [$token, startData, endData, estSelected, typeSelected], "id": 1};
+    let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
+
+    function getPub() {
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            // console.log(data.result.publications);
+            userData = data.result.publications;
+            userData = userData.slice(0, userData.length - userData.length % 4);
+            console.log("pub len:", userData.length);
+            console.log(userData);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onMount(() =>{
+        setTimeout(getPub(), 100);
+    });
 
     const ests = [
         { value: 1, text: "Негативная" },
@@ -20,6 +50,8 @@
         {value: 2, text: "Посты"},
         {value: 3, text: "Коментарии"},
     ];
+
+    // console.log([...Array(5).keys()]);
 </script>
 
 <div class="publications-page">
@@ -34,18 +66,15 @@
         <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
+    {#each [...Array(userData.length / 4).keys()] as i}
     <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
+        {#each [...Array(4).keys()] as j}
+        {#if i * 4 + j < userData.length}
+            <Card type={userData[i * 4 + j][2] === 1 ? "photo" : "text"} sentiment={userData[i * 4 + j][3]} date={userData[i * 4 + j][4]} link={userData[i * 4 + j][5]} content={userData[i * 4 + j][6]}/>
+        {/if}
+        {/each}
     </div>
-    <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
-    </div>
+    {/each}
     <div class="footer"></div>
 </div>
 

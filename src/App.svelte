@@ -19,11 +19,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700;900&display=swap" type="text/css" rel="stylesheet">
 
 <main>
-    <!-- {#if !tokenVal} -->
-    <!-- <Landing/> -->
-    <!-- {:else} -->
+    {#if !tokenVal}
+    <Landing/>
+    {:else}
     <MainPage/>
-    <!-- {/if} -->
+    {/if}
 </main>
 
 <style>

@@ -6,6 +6,9 @@
     export let conf = false;
     export let info = "Нет информации"
     export let icon = null;
+    let hasInfo = false;
+
+    $: hasInfo = info !== "-";
 
     onMount(() => {
         library.add(icon);
@@ -15,11 +18,11 @@
 <dev class="info-card">
     <FontAwesomeIcon bind:icon={icon} size="lg"/>
     <div class="info-block">
-        <div class="info">{info}</div>
+        <div class="info">{info === "-" ? "Нет информации" : info}</div>
         <div class="conf">
-        {#if conf}
+        {#if conf && hasInfo}
             Конфиденциально
-        {:else}
+        {:else if hasInfo}
             Не конфиденциально
         {/if}
         </div>

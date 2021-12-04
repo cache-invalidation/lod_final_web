@@ -1,28 +1,77 @@
 <script>
     import { faPhoneAlt, faEnvelope, faVenusMars, faCity, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
     import Info from './Info.svelte'
+    import { token } from "../stores"
+    import { onMount } from 'svelte'
 
-    let estClass = "positive";
+    let fetchData = {"jsonrpc": "2.0", "method": "get_user_info", "params": [$token], "id": 1};
+    let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
+
+    onMount(() =>{
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.result);
+            userData = data.result;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+
+    function set(val) {
+        if (userData) {
+            return data[val];
+        }
+
+        return "";
+    }
+
+    let estClass = "";
+
+    $: estClass = getEstColor(userData[6]);
+
+    function getEstColor(est) {
+        if (est >= 8) {
+            return "positive";
+        }
+        else if (est >= 4) {
+            return "neutral";
+        }
+
+        return "negative"
+    } 
+
+    function getConf(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    console.log(getConf(0, 2));
 </script>
 
 <div class="about-me">
     <div class="info-block">
         <div class="avatar-block">
-            <img src="img/wolf.jpg" alt="avatar" class="avatar">
+            <img src={userData[5]} alt="avatar" class="avatar">
         </div>
         <div class="info">
-            <p class="full-name">Волков Алексей Александрович</p>
-            <Info icon={faPhoneAlt} info="+7 (985) 654 23 54" conf/>
-            <Info icon={faEnvelope} info="sample@mail.ru" />
-            <Info icon={faVenusMars} info="Мужской" />
-            <Info icon={faCity} info="Москва"/>
-            <Info icon={faGraduationCap} info="МФТИ" conf/>
+            <p class="full-name">{userData[2]} {userData[1]} {userData[3]}</p>
+            <Info icon={faPhoneAlt} info={userData[8]} conf={getConf(0, 2)}/>
+            <Info icon={faEnvelope} info={userData[7]} conf={getConf(0, 2)}/>
+            <Info icon={faVenusMars} info={userData[9] ? "Женский" : "Мужской"} conf={getConf(0, 2)}/>
+            <Info icon={faCity} info={userData[10]} conf={getConf(0, 2)}/>
+            <Info icon={faGraduationCap} info={userData[11]} conf={getConf(0, 2)}/>
         </div>
     </div>
     <div class="estimate-block">
         <div class="estimate-text">
             <p class="general-est">Общая оценка</p>
-            <p class="est-num"><span class={estClass}>8.9</span>/10</p>
+            <p class="est-num"><span class={estClass}>{userData[6]}</span>/10</p>
         </div>
     </div>
 </div>

@@ -3,12 +3,36 @@
     import { Select, Checkbox } from "smelte";
     import Card from "./Card.svelte"
     import { TextField } from "smelte";
+    import { token } from "../stores"
 
     let startData = null;
     let endData = null;
     let estSelected = null;
     let typeSelected = null;
     let searchVal = null;
+
+    let fetchData = {"jsonrpc": "2.0", "method": "search", "params": [$token, startData, endData, estSelected, typeSelected, searchVal], "id": 1};
+    let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
+
+    function search() {
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(fetchData);
+            userData = data.result.publications;
+            userData = userData.slice(0, userData.length - userData.length % 4);
+            console.log("search len:", userData.length);
+            console.log(userData);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     const ests = [
         { value: 1, text: "Негативная" },
@@ -31,10 +55,10 @@
     
     <div class="search-engine">
         <div class="search-input-wrapper">
-            <TextField label="Поиск" add="search-input" bind:value={searchVal} append="search"/>
+            <TextField label="Поиск" add="search-input" append="search" on:change={i => {searchVal = i.detail; search();}}/>
         </div>
         <div class="filter">
-            <div class="filter-item"><DatePicker on:change={i => startData = i.detail } label="Начало" /></div>
+            <div class="filter-item"><DatePicker on:change={i => {startData = i.detail; console.log(i)} } label="Начало" /></div>
             <div class="filter-item"><DatePicker on:change={i => endData = i.detail } label="Конец" /></div>
             <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)}  optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
             <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)}  optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
