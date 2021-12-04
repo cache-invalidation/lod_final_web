@@ -65,7 +65,7 @@
         <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => {estSelected = v.detail; getPub()}} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
         <div class="filter-item"><Select label="Тип" items={type} on:change={v => {typeSelected = v.detail; getPub();}} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
-    <PubVis/>
+    <div class="graph"><PubVis/></div> 
     {#each [...Array(userData.length / 4).keys()] as i}
     <div class="card-holder">
         {#each [...Array(4).keys()] as j}
@@ -86,6 +86,14 @@
         flex-direction: column;
         align-content: center;
         align-items: center;
+    }
+
+    .graph {
+        padding:20px;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.25);
+        margin-top:2vh;
     }
 
     .title {
