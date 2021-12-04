@@ -4,10 +4,37 @@
     import PubVis from "./PubVis.svelte"
     import Card from "./Card.svelte"
 
+    import { token } from "../stores"
+    import { onMount } from 'svelte'
+
     let startData = null;
     let endData = null;
     let estSelected = null;
     let typeSelected = null;
+
+    let fetchData = {"jsonrpc": "2.0", "method": "get_publications", "params": [$token, startData, endData, estSelected, typeSelected], "id": 1};
+    let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
+
+    function getPub() {
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.result.publications);
+            userData = data.result.publications;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onMount(() =>{
+        getPub();
+    });
 
     const ests = [
         { value: 1, text: "Негативная" },
