@@ -7,22 +7,22 @@
     let fetchData = {"jsonrpc": "2.0", "method": "get_user_info", "params": [$token], "id": 1};
     let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
 
-    // onMount(() =>{
-    //     fetch('http://45.134.255.154:32086/', {
-    //         method: 'post', 
-    //         body: JSON.stringify(fetchData)
-    //     })
-    //     .then(response => {
-    //         return response.json();
-    //     })
-    //     .then(data => {
-    //         console.log(data.result);
-    //         userData = data.result;
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //     });
-    // });
+    onMount(() =>{
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.result);
+            userData = data.result;
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
 
     function set(val) {
         if (userData) {

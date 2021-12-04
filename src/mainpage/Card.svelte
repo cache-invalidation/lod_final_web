@@ -53,7 +53,7 @@
             />
             {:else if type="text"}
             <div class="p-5 pb-0 pt-3 text-gray-700 body-2 card-text">
-                {content}
+                {content.slice(0, 100)}
             </div>
             {/if}
         </div>

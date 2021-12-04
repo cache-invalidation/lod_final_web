@@ -36,7 +36,7 @@
     }
 
     onMount(() =>{
-        getPub();
+        setTimeout(getPub(), 100);
     });
 
     const ests = [
@@ -73,17 +73,8 @@
             <Card type={userData[i * 4 + j][2] === 1 ? "photo" : "text"} sentiment={userData[i * 4 + j][3]} date={userData[i * 4 + j][4]} link={userData[i * 4 + j][5]} content={userData[i * 4 + j][6]}/>
         {/if}
         {/each}
-        <!-- <Card type="text"/> -->
-        <!-- <Card type="photo"/> -->
-        <!-- <Card type="text"/> -->
     </div>
     {/each}
-    <!-- <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
-    </div> -->
     <div class="footer"></div>
 </div>
 

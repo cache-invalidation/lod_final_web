@@ -4,10 +4,40 @@
     import PubVis from "./PubVis.svelte"
     import Card from "./Card.svelte"
 
+    import { token } from "../stores"
+    import { onMount } from 'svelte'
+
     let startData = null;
     let endData = null;
     let estSelected = null;
     let typeSelected = null;
+
+    let fetchData = {"jsonrpc": "2.0", "method": "get_mentions", "params": [$token, startData, endData, estSelected], "id": 1};
+    let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
+
+    function getMents() {
+        fetch('http://45.134.255.154:32086/', {
+            method: 'post', 
+            body: JSON.stringify(fetchData)
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            userData = data.result.mentions;
+            userData = userData.slice(0, userData.length - userData.length % 4);
+            console.log("ments len:", userData.length);
+            console.log(userData);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    onMount(() =>{
+        getMents();
+    });
 
     const ests = [
         { value: 1, text: "Негативная" },
@@ -34,18 +64,15 @@
         <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
+    {#each [...Array(userData.length / 4).keys()] as i}
     <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
+        {#each [...Array(4).keys()] as j}
+        {#if i * 4 + j < userData.length}
+            <Card type="text" sentiment={userData[i * 4 + j][2]} date={userData[i * 4 + j][3]} link={userData[i * 4 + j][4]} content={userData[i * 4 + j][5]}/>
+        {/if}
+        {/each}
     </div>
-    <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
-    </div>
+    {/each}
     <div class="footer"></div>
 </div>
 
