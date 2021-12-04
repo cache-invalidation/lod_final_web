@@ -5,10 +5,25 @@
     import { faBan } from '@fortawesome/free-solid-svg-icons';
 
     export let type = "photo";
+    export let content = "";
+    export let sentiment = 1;
+    export let date;
+    export let link;
     library.add(faBan);
 
     let showDialog = false;
     let dialogArgee = false;
+
+    function getSent(sent) {
+        if (sent === 1) {
+            return ["НЕГАТИВНО", "negative"];
+        }
+        else if (sent === 2) {
+            return ["НЕЙТРАЛЬНО", "neutral"];
+        }
+        
+        return ["ПОЗИТИВНО", "positive"];
+    }
 </script>
 {#if showDialog}
 <div style="width: 100vw; height: 100vh; position: fixed; background-color: #000000; left: 0; top: 0; opacity: 0.5; z-index: 11;"></div>
@@ -33,25 +48,22 @@
             {#if type === "photo"}
             <img
                 class="w-full card-img"
-                src="https://placekitten.com/300/200"
+                src={link}
                 alt="kitty"
             />
             {:else if type="text"}
             <div class="p-5 pb-0 pt-3 text-gray-700 body-2 card-text">
-                The three little kittens, they lost their mittens,<br>
-                And they began to cry,<br>
-                "Oh, mother dear, we sadly fear,<br>
-                That we have lost our mittens."
+                {content}
             </div>
             {/if}
         </div>
         <div slot="text" class="est-and-date">
-            <div class="estimation">ПОЗИТИВНО</div>
-            <p class="date">Дата публикации 13.11.2021</p>
+            <div class="estimation {getSent(sentiment)[1]}">{getSent(sentiment)[0]}</div>
+            <p class="date">Дата публикации {date}</p>
         </div>
         <div slot="actions">
             <div class="p-2 buttons">
-                <Button add="source-button">К ИСТОЧНИКУ</Button>
+                <Button add="source-button" on:click={() => {window.open(link)}}>К ИСТОЧНИКУ</Button>
                 <Button add="ban-button" on:click={() => showDialog = true}><FontAwesomeIcon icon={faBan} size="lg"/></Button>
             </div>
         </div>
@@ -74,7 +86,7 @@
         padding: 5px 20px 5px 20px;
         color: #ffffff;
         font-weight: 700;
-        width: 40%;
+        width: 50%;
     }
 
     .date {
@@ -123,6 +135,7 @@
         height: 250px;
         width: 350px;
         filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.25));
+        object-fit: contain;
     }
 
     .card-text {
@@ -139,5 +152,17 @@
 
     .card :global(.bg) {
         background-color: #ffffff;
+    }
+
+    .positive {
+        background-color: #009E62;
+    }
+
+    .negative {
+        background-color: #E65872;
+    }
+
+    .neutral {
+        background-color: #FF8A01;
     }
 </style>

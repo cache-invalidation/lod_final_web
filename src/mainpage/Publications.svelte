@@ -24,8 +24,11 @@
             return response.json();
         })
         .then(data => {
-            console.log(data.result.publications);
+            // console.log(data.result.publications);
             userData = data.result.publications;
+            userData = userData.slice(0, userData.length - userData.length % 4);
+            console.log("pub len:", userData.length);
+            console.log(userData);
         })
         .catch(err => {
             console.log(err);
@@ -47,6 +50,8 @@
         {value: 2, text: "Посты"},
         {value: 3, text: "Коментарии"},
     ];
+
+    // console.log([...Array(5).keys()]);
 </script>
 
 <div class="publications-page">
@@ -61,18 +66,24 @@
         <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
+    {#each [...Array(userData.length / 4).keys()] as i}
     <div class="card-holder">
-        <Card type="photo"/>
-        <Card type="text"/>
-        <Card type="photo"/>
-        <Card type="text"/>
+        {#each [...Array(4).keys()] as j}
+        {#if i * 4 + j < userData.length}
+            <Card type={userData[i * 4 + j][2] === 1 ? "photo" : "text"} sentiment={userData[i * 4 + j][3]} date={userData[i * 4 + j][4]} link={userData[i * 4 + j][5]} content={userData[i * 4 + j][6]}/>
+        {/if}
+        {/each}
+        <!-- <Card type="text"/> -->
+        <!-- <Card type="photo"/> -->
+        <!-- <Card type="text"/> -->
     </div>
-    <div class="card-holder">
+    {/each}
+    <!-- <div class="card-holder">
         <Card type="photo"/>
         <Card type="text"/>
         <Card type="photo"/>
         <Card type="text"/>
-    </div>
+    </div> -->
     <div class="footer"></div>
 </div>
 
