@@ -31,7 +31,7 @@
 
 <div class="card">
     <Dialog bind:value={showDialog} classes="items-center z-50 rounded bg-white dark:bg-dark-400 p-4 shadow bg">
-        <h5 slot="title">Вы уверены, что хотити воспользоваться совим правом на цифровое забвение?</h5>
+        <h5 slot="title">Вы уверены, что хотити воспользоваться своим правом на цифровое забвение?</h5>
         <!-- <div class="text-gray-700">Подвердите</div> -->
         <div slot="actions">
             <Button text on:click={() => showDialog = false}>Отменить</Button>
