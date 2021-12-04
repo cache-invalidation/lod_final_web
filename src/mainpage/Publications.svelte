@@ -12,10 +12,10 @@
     let estSelected = null;
     let typeSelected = null;
 
-    let fetchData = {"jsonrpc": "2.0", "method": "get_publications", "params": [$token, startData, endData, estSelected, typeSelected], "id": 1};
     let userData = ["", "", "", "", "", "", "", "", "", "", "", ""];
 
     function getPub() {
+        let fetchData = {"jsonrpc": "2.0", "method": "get_publications", "params": [$token, startData, endData, estSelected, typeSelected], "id": 1};
         fetch('http://45.134.255.154:32086/', {
             method: 'post', 
             body: JSON.stringify(fetchData)
@@ -24,7 +24,7 @@
             return response.json();
         })
         .then(data => {
-            // console.log(data.result.publications);
+            console.log(fetchData);
             userData = data.result.publications;
             userData = userData.slice(0, userData.length - userData.length % 4);
             console.log("pub len:", userData.length);
@@ -48,7 +48,7 @@
     const type = [
         {value: 1, text: "Фото"},
         {value: 2, text: "Посты"},
-        {value: 3, text: "Коментарии"},
+        {value: 2, text: "Коментарии"},
     ];
 
     // console.log([...Array(5).keys()]);
@@ -60,10 +60,10 @@
         <hr width="100%" align="center">
     </div>
     <div class="filter">
-        <div class="filter-item"><DatePicker on:change={i => startData = i.detail } label="Начало"/></div>
-        <div class="filter-item"><DatePicker on:change={i => endData = i.detail } label="Конец" /></div>
-        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => (estSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
-        <div class="filter-item"><Select label="Тип" items={type} on:change={v => (typeSelected = v.detail)} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
+        <div class="filter-item"><DatePicker on:change={i => {startData = i.detail; getPub();} } label="Начало"/></div>
+        <div class="filter-item"><DatePicker on:change={i => {endData = i.detail; getPub();} } label="Конец" /></div>
+        <div class="filter-item"><Select label="Оцеки" items={ests} on:change={v => {estSelected = v.detail; getPub()}} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none "/></div>
+        <div class="filter-item"><Select label="Тип" items={type} on:change={v => {typeSelected = v.detail; getPub();}} optionsClasses="bg absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500 absolute left-0 bg-white rounded shadow w-full z-20 dark:bg-dark-500  rounded-t-none" /></div>
     </div>
     <PubVis/>
     {#each [...Array(userData.length / 4).keys()] as i}
