@@ -48,7 +48,7 @@
     const type = [
         {value: 1, text: "Фото"},
         {value: 2, text: "Посты"},
-        {value: 3, text: "Коментарии"},
+        {value: 2, text: "Коментарии"},
     ];
 </script>
 
